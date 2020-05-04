@@ -38,4 +38,18 @@ router.post("/", db.validateBody(table, validateBodyCb), async (req, res, next) 
     }
 });
 
+//  Update existing project
+router.put("/:id", db.validateBody(table, validateBodyCb), db.validateId(table), async (req, res, next) => {
+    try {
+        const record = await db.update(table, req.record.id, req.recordBody);
+        res.json({
+            id: req.record.id,
+            ...req.recordBody
+        });
+    }
+    catch (err) {
+        next(err);
+    }
+});
+
 module.exports = router;

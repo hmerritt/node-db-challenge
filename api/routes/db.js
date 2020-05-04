@@ -91,4 +91,4 @@ function validateBody(table, cb) {
 }
 
 
-module.exports = {get, insert, validateId, validateBody};
+module.exports = {get, insert, update, remove, validateId, validateBody};
