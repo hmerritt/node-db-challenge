@@ -52,4 +52,23 @@ router.put("/:id", db.validateBody(table, validateBodyCb), db.validateId(table),
     }
 });
 
+//  Delete project
+router.delete("/:id", db.validateId(table), async (req, res, next) => {
+    try {
+        const record = await db.remove(table, req.record.id);
+        if (record) {
+            res.json({
+                message: `${table} {${req.record.id}} deleted successfully`
+            });
+        }
+        else
+        {
+            next(err);
+        }
+    }
+    catch (err) {
+        next(err);
+    }
+});
+
 module.exports = router;
