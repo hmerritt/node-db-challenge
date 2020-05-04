@@ -14,6 +14,11 @@ function get(table, id=null) {
     }
 }
 
+//  Create a new record
+function insert(table, data) {
+    return db(table).insert(data);
+}
+
 
 //  Validators
 
@@ -76,4 +81,4 @@ function validateBody(table, cb) {
 }
 
 
-module.exports = {get, validateId, validateBody};
+module.exports = {get, insert, validateId, validateBody};
