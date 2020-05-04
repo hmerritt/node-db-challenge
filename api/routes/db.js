@@ -32,12 +32,21 @@ function remove(table, id) {
 
 //  Custom
 
-//  Get project tasks
-function getTasks(id) {
-    return db("tasks")
-        .select("tasks.id", "tasks.project_id", "tasks.description", "tasks.notes", "tasks.completed")
-        .join("projects", "projects.id", "tasks.project_id")
-        .where("projects.id", id);
+//  Get tasks
+function getTasks(id=null, table_col) {
+    if (id)
+    {
+        return db("tasks")
+            .select("tasks.id", "tasks.project_id", "projects.name as project_name", "projects.description as project_description", "tasks.description", "tasks.notes", "tasks.completed")
+            .join("projects", "projects.id", "tasks.project_id")
+            .where(table_col, id);
+    } else
+    {
+        //  Get all rows
+        return db("tasks")
+            .select("tasks.id", "tasks.project_id", "projects.name as project_name", "projects.description as project_description", "tasks.description", "tasks.notes", "tasks.completed")
+            .join("projects", "projects.id", "tasks.project_id");
+    }
 }
 
 

@@ -27,7 +27,7 @@ router.get("/:id", db.validateId(table), async (req, res, next) => {
 //  Get individial tasks
 router.get("/:id/tasks", db.validateId(table), async (req, res, next) => {
     try {
-        const record = await db.getTasks(req.record.id);
+        const record = await db.getTasks(req.record.id, "projects.id");
         res.json(record);
     }
     catch (err) {

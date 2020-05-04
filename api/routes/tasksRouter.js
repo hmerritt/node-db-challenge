@@ -17,18 +17,19 @@ const validateBodyCb = (req) => {
 
 //  Get all tasks
 router.get("/", db.validateId(table), async (req, res, next) => {
-    res.send(req.record);
+    try {
+        const record = await db.getTasks();
+        res.json(record);
+    }
+    catch (err) {
+        next(err);
+    }
 });
 
 //  Get individial
 router.get("/:id", db.validateId(table), async (req, res, next) => {
-    res.send(req.record);
-});
-
-//  Get individial tasks
-router.get("/:id/tasks", db.validateId(table), async (req, res, next) => {
     try {
-        const record = await db.getTasks(req.record.id);
+        const record = await db.getTasks(req.record.id, "tasks.id");
         res.json(record);
     }
     catch (err) {
