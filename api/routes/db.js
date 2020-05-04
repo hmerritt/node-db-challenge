@@ -19,6 +19,16 @@ function insert(table, data) {
     return db(table).insert(data);
 }
 
+//  Update a record
+function update(table, id, data) {
+    return db(table).where("id", id).update(data);
+}
+
+//  Delete record
+function remove(table, id) {
+    return db(table).where("id", id).del();
+}
+
 
 //  Validators
 
