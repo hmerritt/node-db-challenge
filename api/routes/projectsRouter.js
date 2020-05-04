@@ -24,6 +24,17 @@ router.get("/:id", db.validateId(table), async (req, res, next) => {
     res.send(req.record);
 });
 
+//  Get individial tasks
+router.get("/:id/tasks", db.validateId(table), async (req, res, next) => {
+    try {
+        const record = await db.getTasks(req.record.id);
+        res.json(record);
+    }
+    catch (err) {
+        next(err);
+    }
+});
+
 //  Create a new project
 router.post("/", db.validateBody(table, validateBodyCb), async (req, res, next) => {
     try {

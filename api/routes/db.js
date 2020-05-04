@@ -30,6 +30,18 @@ function remove(table, id) {
 }
 
 
+//  Custom
+
+//  Get project tasks
+function getTasks(id) {
+    return db("tasks")
+        .select("tasks.id", "tasks.project_id", "tasks.description", "tasks.notes", "tasks.completed")
+        .join("projects", "projects.id", "tasks.project_id")
+        .where("projects.id", id);
+}
+
+
+
 //  Validators
 
 //  Check if record id exists
@@ -91,4 +103,4 @@ function validateBody(table, cb) {
 }
 
 
-module.exports = {get, insert, update, remove, validateId, validateBody};
+module.exports = {get, insert, update, remove, getTasks, validateId, validateBody};
