@@ -1,6 +1,8 @@
 # Mac cruft
 .DS_Store
 
+projects.db
+
 # Logs
 logs
 *.log
